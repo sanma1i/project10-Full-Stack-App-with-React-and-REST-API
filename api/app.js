@@ -10,6 +10,8 @@ const app = express();
 //const Sequelize = require('sequelize');
 const sequelize = require('./models').sequelize;
 //const bodyParser = require('body-parser')
+
+//Import cors library
 const cors = require('cors');
 
 
