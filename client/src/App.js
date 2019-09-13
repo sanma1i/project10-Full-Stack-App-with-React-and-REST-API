@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Switch
 } from 'react-router-dom';
@@ -17,30 +17,45 @@ import Authenticated from './components/Authenticated';
 import UnhandledError from './components/UnhandledError';
 import Forbiden from './components/Forbiden';
 import withContext from './Context';
-import PrivateRoute from './PrivateRoute';
+//import PrivateRoute from './PrivateRoute';
 
 // components with Context
-const HeaderContext = withContext(Header);
-const CoursesContext = withContext(Courses);
-const CourseDetailContext = withContext(CourseDetail);
-const UserSignUpContext = withContext(UserSignUp);
-const UserSignInContext = withContext(UserSignIn);
-const UserSignOutContext = withContext(UserSignOut);
-const CreateCourseContext = withContext(CreateCourse);
-const UpdateCourseContext = withContext(UpdateCourse);
-export default () => (
-  <Router>
-    <div>
-      <HeaderWithContext />
+const HeaderWithContext = withContext(Header);
+const CoursesWithContext = withContext(Courses);
+const CourseDetailWithContext = withContext(CourseDetail);
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
+const CreateCourseWithContext = withContext(CreateCourse);
+//const UpdateCourseWithContext = withContext(UpdateCourse);
 
-      <Switch>
-        <Route exact path="/" component={Courses} />
-        <PrivateRoute path="/authenticated" component={AuthWithContext} />
-        <Route path="/signin" component={UserSignInWithContext} />
-        <Route path="/signup" component={UserSignUpWithContext} />
-        <Route path="/signout" component={UserSignOutWithContext} />
-        <Route component={NotFound} />
-      </Switch>
-    </div>
-  </Router>
-);
+export default class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          {/*Header always showing, location extracted and passed down as props*/}
+          <Route render={({ location }) => <HeaderWithContext location={location.pathname} />} />
+          <Switch>
+            <Route exact path='/' component={CoursesWithContext} />
+
+            {/*<Route  path='/courses/create' component={ CreateCourse } />*/}
+            {/*<PrivateRoute path='/courses/create' component={CreateCourseWithContext} />*/}
+
+            {/*<Route path='/courses/:id/update' component={ UpdateCourse } />*/}
+            {/*<PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext} />*/}
+
+            <Route path='/courses/:id' component={CourseDetailWithContext} />
+            <Route path='/signin' component={UserSignInWithContext} />
+            <Route path='/signup' component={UserSignUpWithContext} />
+            <Route path='/signout' component={UserSignOutWithContext} />
+
+            {/*<Route path='/forbidden' component={Forbidden} />*/}
+            <Route path='/error' component={UnhandledError} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
