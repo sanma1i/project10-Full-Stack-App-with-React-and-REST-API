@@ -1,59 +1,46 @@
 import React from 'react';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Switch
-// } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 
-//Import Components
+import Header from './components/Header';
+import CourseDetail from './components/CourseDetail';
 import Courses from './components/Courses';
-// import CourseDetail from './components/CourseDetail';
-// import CreateCourse from './components/CreateCourse';
-// import UpdateCourse from './components/UpdateCourse';
-// import UserSignIn from './components/UserSignIn';
-// import UserSignUp from './components/UserSignUp';
-// import Header from './components/Header';
-// import UserSignOut from './components/UserSignOut'
-// import NotFound from './components/NotFound';
-// import Forbidden from './components/Forbidden';
-//import UnhandledError from './components/UnhendledError';
+import CreateCourse from './components/CreateCourse';
+import NotFound from './components/NotFound';
+import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignOut';
+import Authenticated from './components/Authenticated';
+import UnhandledError from './components/UnhandledError';
+import Forbiden from './components/Forbiden';
+import withContext from './Context';
+import PrivateRoute from './PrivateRoute';
 
+// components with Context
+const HeaderContext = withContext(Header);
+const CoursesContext = withContext(Courses);
+const CourseDetailContext = withContext(CourseDetail);
+const UserSignUpContext = withContext(UserSignUp);
+const UserSignInContext = withContext(UserSignIn);
+const UserSignOutContext = withContext(UserSignOut);
+const CreateCourseContext = withContext(CreateCourse);
+const UpdateCourseContext = withContext(UpdateCourse);
+export default () => (
+  <Router>
+    <div>
+      <HeaderWithContext />
 
-class App extends React.Component {
-  state = {
-    courses: [],
-    isLoading: true
-  }
-
-  componentDidMount() {
-    fetch(`http://localhost:5000/api/courses`)
-      .then(response => response.json())
-      .then(courses => this.setState({
-        courses: courses,
-        isLoading: false,
-      }))
-      .then(() => console.log(this.state.courses))
-      .catch(error => console.log('Sorry'));
-  }
-  render() {
-    return this.state.isLoading ? (<h2>It's Loading...</h2>) : (
-      <div className="container">
-        {
-          this.state.courses.map(course => {
-            return (
-              <ul key={course.id}>
-                <li>{course.id}</li>
-                <li>{course.title}</li>
-                <li>{course.description}</li>
-                <li>{course.estimatedTime}</li>
-                <li>{course.materialsNeeded}</li>
-              </ul>
-            );
-          })
-        }
-      </div>
-    )
-  }
-}
-export default App;
-
+      <Switch>
+        <Route exact path="/" component={Courses} />
+        <PrivateRoute path="/authenticated" component={AuthWithContext} />
+        <Route path="/signin" component={UserSignInWithContext} />
+        <Route path="/signup" component={UserSignUpWithContext} />
+        <Route path="/signout" component={UserSignOutWithContext} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  </Router>
+);

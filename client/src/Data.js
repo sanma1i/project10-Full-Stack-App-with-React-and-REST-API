@@ -1,3 +1,4 @@
+import config from './config';
 export default class Data {
     api(path, method, body = null) {
         const url = config.apiBaseUrl + path;
