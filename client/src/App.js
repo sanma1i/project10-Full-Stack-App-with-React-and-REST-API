@@ -8,7 +8,7 @@ import './styles/global.css';
 import Header from './components/Header';
 import Authenticated from './components/Authenticated';
 //import CourseDetail from './components/CourseDetail';
-//import Courses from './components/Courses';
+import Courses from './components/Courses';
 //import CreateCourse from './components/CreateCourse';
 //import UpdateCourse from './components/UpdateCourse';
 //import NotFound from './components/NotFound'
@@ -24,7 +24,7 @@ import PrivateRoute from './PrivateRoute';
 
 // //components with Context
 const HeaderWithContext = withContext(Header);
-//const CoursesWithContext = withContext(Courses);
+const CoursesWithContext = withContext(Courses);
 //const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
@@ -41,7 +41,7 @@ class App extends React.Component {
           <Route render={({ location }) => <HeaderWithContext location={location.pathname} />} />
 
           <Switch>
-            {/*<Route exact path="/" component={CoursesContext} />*/}
+            <Route exact path="/" component={CoursesWithContext} />
             <PrivateRoute path="/authenticated" component={AuthWithContext} />
             {/*<PrivateRoute path="/courses/create" component={CreateCourseContext} />*/}
             {/*<PrivateRoute path="/courses/:id/update" component={UpdateCourseContext} />*/}
