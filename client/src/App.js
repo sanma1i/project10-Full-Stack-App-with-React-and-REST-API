@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   BrowserRouter,
   Route,
@@ -9,49 +9,44 @@ import Header from './components/Header';
 import CourseDetail from './components/CourseDetail';
 import Courses from './components/Courses';
 import CreateCourse from './components/CreateCourse';
+import UpdateCourse from './components/UpdateCourse';
 import NotFound from './components/NotFound';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
-import Authenticated from './components/Authenticated';
+//import Authenticated from './components/Authenticated';
 import UnhandledError from './components/UnhandledError';
-import Forbiden from './components/Forbiden';
+import Forbidden from './components/Forbiden';
 import withContext from './Context';
-//import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
 // components with Context
-const HeaderWithContext = withContext(Header);
-const CoursesWithContext = withContext(Courses);
-const CourseDetailWithContext = withContext(CourseDetail);
-const UserSignUpWithContext = withContext(UserSignUp);
-const UserSignInWithContext = withContext(UserSignIn);
-const UserSignOutWithContext = withContext(UserSignOut);
-const CreateCourseWithContext = withContext(CreateCourse);
-//const UpdateCourseWithContext = withContext(UpdateCourse);
+const HeaderContext = withContext(Header);
+const CoursesContext = withContext(Courses);
+const CourseDetailContext = withContext(CourseDetail);
+const UserSignUpContext = withContext(UserSignUp);
+const UserSignIContext = withContext(UserSignIn);
+const UserSignOutContext = withContext(UserSignOut);
+const CreateCourseContext = withContext(CreateCourse);
+const UpdateCourseContext = withContext(UpdateCourse);
 
-export default class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          {/*Header always showing, location extracted and passed down as props*/}
-          <Route render={({ location }) => <HeaderWithContext location={location.pathname} />} />
+          <Route render={({ location }) => <HeaderContext location={location.pathname} />} />
+
           <Switch>
-            <Route exact path='/' component={CoursesWithContext} />
-
-            {/*<Route  path='/courses/create' component={ CreateCourse } />*/}
-            {/*<PrivateRoute path='/courses/create' component={CreateCourseWithContext} />*/}
-
-            {/*<Route path='/courses/:id/update' component={ UpdateCourse } />*/}
-            {/*<PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext} />*/}
-
-            <Route path='/courses/:id' component={CourseDetailWithContext} />
-            <Route path='/signin' component={UserSignInWithContext} />
-            <Route path='/signup' component={UserSignUpWithContext} />
-            <Route path='/signout' component={UserSignOutWithContext} />
-
-            {/*<Route path='/forbidden' component={Forbidden} />*/}
-            <Route path='/error' component={UnhandledError} />
+            <Route exact path="/" component={CoursesContext} />
+            <PrivateRoute path="/courses/create" component={CreateCourseContext} />
+            <PrivateRoute path="/courses/:id/update" component={UpdateCourseContext} />
+            <Route path="/courses/:id" component={CourseDetailContext} />
+            <Route path="/signin" component={UserSignInContext} />
+            <Route path="/signup" component={UserSignUpContext} />
+            <Route path="/signout" component={UserSignOutContext} />
+            <Route path="/forbidden" component={Forbidden} />
+            <Route path="/error" component={UnhandledError} />
             <Route component={NotFound} />
           </Switch>
         </div>
@@ -59,3 +54,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App
