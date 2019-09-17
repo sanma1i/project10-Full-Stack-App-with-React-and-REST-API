@@ -47,7 +47,7 @@ class App extends React.Component {
             <Route path="/signin" component={UserSignInWithContext} />
             <Route path="/signup" component={UserSignUpWithContext} />
             <Route path="/signout" component={UserSignOutWithContext} />
-            {/*<Route path="/forbidden" component={Forbidden} />*/}
+            {/* <Route path="/forbidden" component={Forbidden} /> */}
             {/*<Route path="/error" component={UnhandledError} />*/}
             {/*<Route component={NotFound} />*/}
           </Switch>
