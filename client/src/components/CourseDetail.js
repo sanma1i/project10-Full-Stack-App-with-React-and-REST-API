@@ -69,28 +69,39 @@ class CourseDetail extends Component {
 
     }
     render() {
-
-        const course = this.state.course[0];
-        const user = this.state.isUserAuth;
+        const { course } = this.state;
+        const { userInfo } = this.state;
+        const { isUserAuth } = this.state;
 
         return (
             <div>
-                { /* Ternary operator to render either the content or loading message */
-                    this.state.course ?
+                {/* Ternary operator to render either the content or loading message */
+                    this.state.course ? (
                         <div>
                             <div className="actions--bar">
                                 <div className="bounds">
-
                                     <div className="grid-100">
-                                        { /* Ternary operator to render either Update and Delete button if user the course owner*/
-                                            user ?
+                                        {/* Ternary operator to render either Update and Delete button if user the course owner*/
+                                            isUserAuth ? (
                                                 <span>
-                                                    <Link className="button" to={`/courses/${this.props.match.params.id}/update`}>Update Course</Link>
-                                                    <Link onClick={this.handleDelete} to='#' className="button">Delete Course</Link>
+                                                    <Link
+                                                        className="button"
+                                                        to={`/courses/${this.props.match.params.id}/update`}
+                                                    >
+                                                        Update Course
+                      </Link>
+                                                    <Link
+                                                        onClick={this.handleDelete}
+                                                        to="#"
+                                                        className="button"
+                                                    >
+                                                        Delete Course
+                      </Link>
                                                 </span>
-                                                : null
-                                        }
-                                        <Link className="button button-secondary" to="/">Return to List</Link>
+                                            ) : null}
+                                        <Link className="button button-secondary" to="/">
+                                            Return to List
+                  </Link>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +110,10 @@ class CourseDetail extends Component {
                                 <div className="grid-66">
                                     <div className="course--header">
                                         <h4 className="course--label">Course</h4>
-                                        <h3 className="course--title">{course.course.title}</h3>
-                                        <p>By {course.user.firstName} {course.user.lastName}</p>
+                                        <h3 className="course--title">{course.title}</h3>
+                                        <p>
+                                            By {userInfo.firstName} {userInfo.lastName}
+                                        </p>
                                     </div>
                                     <div className="course--description">
                                         <ReactMarkdown source={course.description} />
@@ -124,12 +137,11 @@ class CourseDetail extends Component {
                                 </div>
                             </div>
                         </div>
-                        :
-                        <h3>Fetching Course Information...</h3>
-                }
+                    ) : (
+                            <h3>Fetching Course Information...</h3>
+                        )}
             </div>
         );
     }
 }
-
 export default CourseDetail;
