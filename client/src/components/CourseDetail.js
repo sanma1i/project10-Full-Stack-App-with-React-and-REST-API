@@ -8,6 +8,7 @@ class CourseDetail extends Component {
     // inital state of the CourseDetail Component
     state = {
         course: [],
+        userInfo: [],
         isUserAuth: null,
     };
 
@@ -27,7 +28,11 @@ class CourseDetail extends Component {
                     user = true;
                 }
                 // setState
-                this.setState({ course: course, isUserAuth: user });
+                this.setState({
+                    course: course.course,
+                    userInfo: course.course.user,
+                    isUserAuth: user,
+                });
             });
         } else if (res.status === 404) { // not found
             window.location.href = '/notfound';
@@ -71,7 +76,7 @@ class CourseDetail extends Component {
         return (
             <div>
                 { /* Ternary operator to render either the content or loading message */
-                    this.state.course.length ?
+                    this.state.course ?
                         <div>
                             <div className="actions--bar">
                                 <div className="bounds">
@@ -94,7 +99,7 @@ class CourseDetail extends Component {
                                 <div className="grid-66">
                                     <div className="course--header">
                                         <h4 className="course--label">Course</h4>
-                                        <h3 className="course--title">{course.title}</h3>
+                                        <h3 className="course--title">{course.course.title}</h3>
                                         <p>By {course.user.firstName} {course.user.lastName}</p>
                                     </div>
                                     <div className="course--description">

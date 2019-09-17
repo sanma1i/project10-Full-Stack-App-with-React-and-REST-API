@@ -11,7 +11,7 @@ import Header from './components/Header';
 import Authenticated from './components/Authenticated';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
-//import UserSignOut from './components/UserSignOut';
+import UserSignOut from './components/UserSignOut';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
 import UpdateCourse from './components/UpdateCourse';
@@ -28,7 +28,7 @@ const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
-//const UserSignOutWithContext = withContext(UserSignOut);
+const UserSignOutWithContext = withContext(UserSignOut);
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 const AuthWithContext = withContext(Authenticated);
@@ -48,7 +48,7 @@ class App extends React.Component {
             <Route path="/courses/:id" component={CourseDetailWithContext} />
             <Route path="/signin" component={UserSignInWithContext} />
             <Route path="/signup" component={UserSignUpWithContext} />
-            {/*<Route path="/signout" component={UserSignOutWithContext} />*/}
+            <Route path="/signout" component={UserSignOutWithContext} />
             {/*<Route path="/forbidden" component={Forbidden} />*/}
             {/*<Route path="/error" component={UnhandledError} />*/}
             {/*<Route component={NotFound} />*/}
