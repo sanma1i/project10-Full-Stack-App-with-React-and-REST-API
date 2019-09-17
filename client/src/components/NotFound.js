@@ -1,10 +1,15 @@
+// Component to render Not found page
+
 import React from 'react';
-//This componenet displays a message if there is no results for the search
+import { Link } from 'react-router-dom';
+
 const NotFound = () => {
     return (
-        <div className="Not Found">
-            <h3> "No results found" </h3>
-            <p> "404 error.Page not found." </p>
-        </div>)
+        <div className="bounds">
+            <h1>Not Found</h1>
+            <p>Sorry! We couldn't find the page you're looking for.</p>
+            <Link className="button button-secondary" to="/">Return to List</Link>
+        </div>
+    );
 }
 export default NotFound;

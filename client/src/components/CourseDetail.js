@@ -55,10 +55,10 @@ class CourseDetail extends Component {
             if (res.status === 204) {
                 window.location.href = '/';
                 return [];
-            } else if (res.status === 500) {
-                window.location.href = '/error';
+            } else if (res.status === 401 || res.status === 403) { // Render forbidden page if status 401 or 403
+                window.location.href = '/forbidden';
             } else {
-                throw new Error();
+                window.location.href = '/error'; // Render unhandled error page if any other status
             }
         }
 

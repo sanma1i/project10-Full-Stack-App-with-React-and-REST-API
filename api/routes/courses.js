@@ -120,10 +120,8 @@ router.post('/courses', authenticateUser, async (req, res, next) => {
 //Updates a course
 router.put('/courses/:id', authenticateUser, async (req, res, next) => {
     //let course = await Course.findByPk(req.params.id);
-
-
     try {
-        let course = Course.findByPk(req.params.id);
+        let course = await Course.findByPk(req.params.id);
         if (course.userId === req.body.userId) {
             if (req.body.title && req.body.description) {
                 course.title = req.body.title;

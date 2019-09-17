@@ -5,21 +5,21 @@ import {
   Switch
 } from 'react-router-dom';
 import './styles/global.css';
+import PrivateRoute from './PrivateRoute';
 import Header from './components/Header';
-import Authenticated from './components/Authenticated';
-import CourseDetail from './components/CourseDetail';
-import Courses from './components/Courses';
-import CreateCourse from './components/CreateCourse';
-//import UpdateCourse from './components/UpdateCourse';
 //import NotFound from './components/NotFound'
+import Authenticated from './components/Authenticated';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 //import UserSignOut from './components/UserSignOut';
-//import Authenticated from './components/Authenticated';
+import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
+import UpdateCourse from './components/UpdateCourse';
+import CreateCourse from './components/CreateCourse';
 //import UnhandledError from './components/UnhandledError';
 //import Forbidden from './components/Forbiden';
 import withContext from './Context';
-import PrivateRoute from './PrivateRoute';
+
 
 
 // //components with Context
@@ -30,7 +30,7 @@ const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 //const UserSignOutWithContext = withContext(UserSignOut);
 const CreateCourseWithContext = withContext(CreateCourse);
-//const UpdateCourseWithContext = withContext(UpdateCourse);*/}
+const UpdateCourseWithContext = withContext(UpdateCourse);
 const AuthWithContext = withContext(Authenticated);
 
 class App extends React.Component {
@@ -44,7 +44,7 @@ class App extends React.Component {
             <Route exact path="/" component={CoursesWithContext} />
             <PrivateRoute path="/authenticated" component={AuthWithContext} />
             <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
-            {/*<PrivateRoute path="/courses/:id/update" component={UpdateCourseContext} />*/}
+            <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
             <Route path="/courses/:id" component={CourseDetailWithContext} />
             <Route path="/signin" component={UserSignInWithContext} />
             <Route path="/signup" component={UserSignUpWithContext} />

@@ -8,11 +8,13 @@ export default class Header extends React.PureComponent {
         return (
             <div className="header">
                 <div className="bounds">
-                    <h1 className="header--logo">Home Page</h1>
+
+                    <Link className="header--logo" to="/">Courses</Link>
+
                     <nav>
                         {authUser ? (
                             <React.Fragment>
-                                <span>Welcome, {authUser.name}!</span>
+                                <span>Welcome, {authUser.firsName} {authUser.lastName}!</span>
                                 <Link to="/signout">Sign Out</Link>
                             </React.Fragment>
                         ) : (
