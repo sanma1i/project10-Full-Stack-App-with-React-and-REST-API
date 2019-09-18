@@ -5,23 +5,22 @@ import {
   Switch
 } from 'react-router-dom';
 import './styles/global.css';
-import PrivateRoute from './PrivateRoute';
+
 import Header from './components/Header';
-//import NotFound from './components/NotFound'
-import UserSignUp from './components/UserSignUp';
-import UserSignIn from './components/UserSignIn';
-import UserSignOut from './components/UserSignOut';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-import UpdateCourse from './components/UpdateCourse';
+import UserSignIn from './components/UserSignIn';
+import UserSignUp from './components/UserSignUp';
+import UserSignOut from './components/UserSignOut';
 import CreateCourse from './components/CreateCourse';
-//import UnhandledError from './components/UnhandledError';
+import UpdateCourse from './components/UpdateCourse';
+//import NotFound from './components/NotFound'
 //import Forbidden from './components/Forbiden';
+//import UnhandledError from './components/UnhandledError';
+import PrivateRoute from './PrivateRoute';
 import withContext from './Context';
 
-
-
-// //components with Context
+//components with Context
 const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
