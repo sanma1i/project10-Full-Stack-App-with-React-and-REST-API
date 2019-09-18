@@ -28,9 +28,9 @@ class CourseDetail extends Component {
                 } = this.props;
                 // authenticated user from context
                 const authUser = context.authenticatedUser;
-                let user = null;
+                let user;
                 // is user authenticated and the course owner ?
-                if (authUser && authUser.id === course[0].userId) {
+                if (authUser && authUser.id === course.course.userId) {
                     user = true;
                 }
                 // setState
@@ -90,106 +90,63 @@ class CourseDetail extends Component {
             isUserAuth
         } = this.state;
 
-        return ( <
-            div > {
-                /* Ternary operator to render either the content or loading message */
-                this.state.course ? ( <
-                    div >
-                    <
-                    div className = "actions--bar" >
-                    <
-                    div className = "bounds" >
-                    <
-                    div className = "grid-100" > {
-                        /* Ternary operator to render either Update and Delete button if user the course owner*/
-                        isUserAuth ? ( <
-                            span >
-                            <
-                            Link className = "button"
-                            to = {
-                                `/courses/${this.props.match.params.id}/update`
-                            } >
-                            Update Course <
-                            /Link> <
-                            Link onClick = {
-                                this.handleDelete
-                            }
-                            to = "#"
-                            className = "button" >
-                            Delete Course <
-                            /Link> <
-                            /span>
-                        ) : null
-                    } <
-                    Link className = "button button-secondary"
-                    to = "/" >
-                    Return to List <
-                    /Link> <
-                    /div> <
-                    /div> <
-                    /div>
+        return (<div> {
+            /* Ternary operator to render either the content or loading message */
+            this.state.course ? (<div>
+                <div className="actions--bar" >
+                    <div className="bounds" >
+                        <div className="grid-100" > {
+                            /* Ternary operator to render either Update and Delete button if user the course owner*/
+                            isUserAuth ? (<span >
+                                <Link className="button" to={`/courses/${this.props.match.params.id}/update`} >
+                                    Update Course </Link>
+                                <Link onClick={this.handleDelete}
+                                    to="#"
+                                    className="button" >
+                                    Delete Course </Link> </span>
+                            ) : null
+                        } <Link className="button button-secondary"
+                            to="/" >
+                                Return to List </Link>
+                        </div> </div> </div>
 
-                    <
-                    div className = "bounds course--detail" >
-                    <
-                    div className = "grid-66" >
-                    <
-                    div className = "course--header" >
-                    <
-                    h4 className = "course--label" > Course < /h4> <
-                    h3 className = "course--title" > {
-                        course.title
-                    } < /h3> <
-                    p >
-                    By {
-                        userInfo.firstName
-                    } {
-                        userInfo.lastName
-                    } <
-                    /p> <
-                    /div> <
-                    div className = "course--description" >
-                    <
-                    ReactMarkdown source = {
-                        course.description
-                    }
-                    /> <
-                    /div> <
-                    /div> <
-                    div className = "grid-25 grid-right" >
-                    <
-                    div className = "course--stats" >
-                    <
-                    ul className = "course--stats--list" >
-                    <
-                    li className = "course--stats--list--item" >
-                    <
-                    h4 > Estimated Time < /h4> <
-                    h3 > {
-                        course.estimatedTime
-                    } < /h3> <
-                    /li> <
-                    li className = "course--stats--list--item" >
-                    <
-                    h4 > Materials Needed < /h4> <
-                    ul >
-                    <
-                    ReactMarkdown source = {
-                        course.materialsNeeded
-                    }
-                    /> <
-                    /ul> <
-                    /li> <
-                    /ul> <
-                    /div> <
-                    /div> <
-                    /div> <
-                    /div>
-                ) : ( <
-                    h3 > Fetching Course Information... < /h3>
+                <div className="bounds course--detail" >
+                    <div className="grid-66" >
+                        <div className="course--header" >
+                            <h4 className="course--label" > Course </h4>
+                            <h3 className="course--title" > {
+                                course.title
+                            } </h3>
+                            <p>
+                                By {userInfo.firstName} {userInfo.lastName}
+                            </p>
+                        </div>
+                        <div className="course--description" >
+                            <ReactMarkdown source={course.description} />
+                        </div>
+                    </div>
+
+                    <div className="grid-25 grid-right" >
+                        <div className="course--stats" >
+                            <ul className="course--stats--list" >
+                                <li className="course--stats--list--item" >
+                                    <h4> Estimated Time </h4>
+                                    <h3> {course.estimatedTime} </h3>
+                                </li>
+                                <li className="course--stats--list--item" >
+                                    <h4> Materials Needed </h4>
+                                    <ul>
+                                        <ReactMarkdown source={course.materialsNeeded} />
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ) : (<h3> Fetching Course Information... </h3>
                 )
-            } <
-            /div>
+        } </div>
         );
     }
 }

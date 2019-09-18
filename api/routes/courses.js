@@ -96,7 +96,7 @@ router.get('/courses/:id', (req, res, next) => { // returns the course (includin
     })
 })
 
-router.post('/courses', authenticateUser, async (req, res, next) => {
+router.post('/courses', async (req, res, next) => {
     try {
         if (req.body.title && req.body.description) {
             //Validation for creating new course
@@ -118,7 +118,7 @@ router.post('/courses', authenticateUser, async (req, res, next) => {
     }
 });
 //Updates a course
-router.put('/courses/:id', authenticateUser, async (req, res, next) => {
+router.put('/courses/:id', async (req, res, next) => {
     //let course = await Course.findByPk(req.params.id);
     try {
         let course = await Course.findByPk(req.params.id);
@@ -150,9 +150,13 @@ router.put('/courses/:id', authenticateUser, async (req, res, next) => {
 
 })
 //Deletes courses
-router.delete("/courses/:id", authenticateUser, async (req, res, next) => {
+router.delete("/courses/:id", async (req, res, next) => {
+    console.log(req.param.id)
+    console.log("WE are Here!!!")
     const course = await Course.findByPk(req.params.id);
-    if (course.userId === req.body.userId) {
+    console.log(course)
+    console.log(course.userId, req.params.id)
+    if (course.userId) {
         await course.destroy();
         res.status(204).end();
     } else {
