@@ -204,7 +204,7 @@ body {
   font-family: "Work Sans", Serif;
   background: #fff;
   font-size: 30px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.07)), url(data13.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url(data13.jpg);
   background-size: cover;
 }
 
@@ -266,8 +266,8 @@ body {
 
 /* line 44, ../sass/global.sass */
 .actions--bar {
-  border-bottom: 1px solid #d5f9fe;
-  background: #2a7a88;
+
+  background: transparent;
   padding: 30px 0;
   margin-top: -30px;
 }
@@ -365,7 +365,7 @@ p {
 .course--module {
   background: #b4ecd0;
   border-radius: 8px;
-  padding: 40px;
+  padding: 25px;
   margin-bottom: 30px;
   min-height: 107px;
   display: block;
@@ -593,7 +593,7 @@ p {
   font-size: 18px;
   font-weight: 100;
   margin: 0 0 10px;
-  color: white;
+  color: black;
   display: block;
 }
 
@@ -615,7 +615,7 @@ p {
 
 /* line 300, ../sass/global.sass */
 .course--stats--list h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Work Sans", Serif;
   font-size: 18px;
 }
 
@@ -633,6 +633,7 @@ p {
 .course--stats--list>li li {
   margin-bottom: 15px;
   list-style-type: circle;
+  box-shadow: 10px 10px 5px grey;
 }
 
 /* line 311, ../sass/global.sass */
@@ -641,6 +642,7 @@ p {
   font-size: 18px;
   font-weight: bold;
   margin: 0;
+  box-shadow: 10px 10px 5px grey;
 }
 
 /* line 460, ../sass/global.sass */
@@ -656,14 +658,15 @@ textarea {
   border-radius: 8px;
   background: #fff;
   padding: 15px;
-  font-size: 16px;
+  font-size: 20px;
   margin: 0 0 20px;
   border: 1px solid white;
-  color: white;
+  color: black;
   line-height: 1.8;
   outline: none;
   font-family: "Cousine";
   box-sizing: border-box;
+  box-shadow: 10px 10px 5px grey;
 }
 
 /* line 29, ../sass/mixins.sass */
