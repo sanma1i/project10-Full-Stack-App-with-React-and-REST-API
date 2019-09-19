@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+// Component to render sign up form
 
-class UserSignUp extends Component {
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-    // inital state
+class UserSignUp extends React.Component {
+
+    // Initial state
     state = {
         firstName: '',
         lastName: '',
@@ -14,7 +17,7 @@ class UserSignUp extends Component {
 
     }
 
-    // change func to handle form inputs
+    // Function to handle form input
     change = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -26,15 +29,11 @@ class UserSignUp extends Component {
         });
     }
 
-    // submit func that creates a new user and sends the credentials to the express server
+    // Handles create new user and sets state of credentials
     submit = (e) => {
         e.preventDefault();
-        // context from props
         const { context } = this.props;
-        // from is either the previous location before landing on '/signup' or '/'
-        const { from } = this.props.location.state || { from: { pathname: '/' } };
 
-        // form values from state
         const {
             firstName,
             lastName,
@@ -43,15 +42,29 @@ class UserSignUp extends Component {
             confirmPassword
         } = this.state;
 
-        // payload new user data
         let user = {};
 
-        // if passwords don't match
-        if (password !== confirmPassword) {
+        if (firstName === '' || lastName === '' || emailAddress === '' || password === '' || confirmPassword === '') {
             this.setState({
-                errors: ["confirm password"]
+                errors: ["Missing information - Please check all fields are entered correctly"]
             })
             return;
+
+        }
+        // const valid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress);  // Testing for valid email, with all characters such as '@' and '.' in the right order
+        // if (!valid) {
+        //     this.setState({
+        //         errors: ["Please enter a valid e-mail address"]
+        //     })
+        //     return;
+        // }
+        // Show error message if password and confirm password don't match
+        if (password !== confirmPassword) {
+            this.setState({
+                errors: ["Passwords do not match. Please re-confirm"]
+            })
+            return;
+            // Otherwise set properties for user
         } else {
             user = {
                 firstName,
@@ -61,32 +74,33 @@ class UserSignUp extends Component {
             };
         }
 
-        // // now we can call createUser with the new payload
         context.data.createUser(user)
             .then(errors => {
+                // Show errors if there are any
                 if (errors.length) {
                     this.setState({ errors: errors });
                 } else {
                     this.setState({ errors: [] });
-                    // after the new user is created we automatically sign-in and redirect to '/'
+                    // Created user is signed in and directed to whichever page they were on
                     context.actions.signIn(emailAddress, password)
-                        .then(user => this.props.history.push(from))
+                        .then(user => this.props.history.push('/'))
                         .catch(err => {
+                            // Otherwise render undhandled error page
                             console.log(err);
                             this.props.history.push('/error');
                         })
                 }
             })
-            .catch(err => { // handle rejected promises
+            .catch(err => {
                 console.log(err);
-                this.props.history.push('/error'); // push to history stack
+                this.setState({
+                    errors: ["Email address is already associated with another user. Please try another"]
+                })
             });
-
-    } // end submit func
-
+    }
 
     render() {
-        // form values from state
+        // Storing values state
         const {
             firstName,
             lastName,
@@ -99,11 +113,11 @@ class UserSignUp extends Component {
             <div className="bounds">
                 <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
-                    {/* ternary operator -> validation errors ? show them : show nothing */}
+                    {/* Ternary operator shows errors only when they exist */}
                     {
                         this.state.errors.length ?
                             <div>
-                                <h2 className="validation--errors--label">Validation errors</h2>
+                                <h2 className="validation--errors--label">Error creating account:</h2>
                                 <div className="validation-errors">
                                     <ul>
                                         {this.state.errors.map((error, i) => <li key={i}>{error}</li>)}
@@ -111,13 +125,13 @@ class UserSignUp extends Component {
                                 </div>
                             </div> : null
                     }
-                    {/* ternary operator -> confirmSignInMsg ? show it : show nothing */}
+                    {/* Ternary operator shows confirm sign-in message only if it exist */}
                     {
                         this.state.confirmSignInMsg ?
                             <div>
                                 <div className="validation-errors">
                                     <ul>
-                                        <li>You are all set now! <a style={{ fontWeight: "bold" }} href="/signin">Sign In</a>!</li>
+                                        <li>You are good to go! <a style={{ fontWeight: "bold" }} href="/signin">Sign In</a>!</li>
                                     </ul>
                                 </div>
                             </div> : null
@@ -132,7 +146,7 @@ class UserSignUp extends Component {
                                 onChange={this.change} value={confirmPassword} /></div>
                             <div className="grid-100 pad-bottom">
                                 <button className="button" type="submit">Sign Up</button>
-                                <button className="button button-secondary" onClick={(e) => { e.preventDefault(); window.location.href = '/'; }}>Cancel</button>
+                                <Link className="button button-secondary" to="/">Cancel</Link>
                             </div>
                         </form>
                     </div>

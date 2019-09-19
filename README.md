@@ -9,11 +9,11 @@ After using the Create React App tool to set up your initial project, you'll:
 -Allow users to sign up and use basic authentication to support users signing in.
 -Add to te supplied CSS to personalize the project
 
-To install:
-- npm install cors
--npm install react-browser-router
--npm install react-dom
--npm install react-router-dom
--npm install react scripts
--npm install js-cookies
--npm add create-react-context
+To run:
+* Download/clone repository
+* Open root folder in your editor
+* Navigate to api folder('cd api') in the terminal
+Run npm install and npm start
+* Navigate to client folder(cd client') in the terminal
+Run npm install and npm start
+* Open the browser to hhtp://localhost:3000/

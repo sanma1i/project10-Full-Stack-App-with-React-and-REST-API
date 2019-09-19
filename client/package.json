@@ -6,6 +6,7 @@
     "create-react-context": "^0.3.0",
     "js-cookie": "^2.2.1",
     "react": "^16.9.0",
+    "react-browser-router": "^2.1.2",
     "react-dom": "^16.9.0",
     "react-markdown": "^4.2.2",
     "react-scripts": "3.1.1"
